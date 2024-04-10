@@ -25,29 +25,36 @@ extension StringExtension on String {
         .replaceAll('۹', '9');
   }
 
-  String addSplitters(int groupeLength, String splitter, [bool ltr = false]) {
+  String addSplitters(int groupLength, String splitter, [bool ltr = false]) {
     String output = '';
 
-    final remainder = this.length % groupeLength;
+    final remainder = this.length % groupLength;
 
     final int length = remainder == 0
-        ? this.length ~/ groupeLength - 1
-        : this.length ~/ groupeLength;
+        ? this.length ~/ groupLength - 1
+        : this.length ~/ groupLength;
 
     if (ltr) {
       for (var i = 0; i < length; i++) {
-        output +=
-            substring(i * groupeLength, (i + 1) * groupeLength) + splitter;
+        output += substring(i * groupLength, (i + 1) * groupLength) + splitter;
       }
 
-      output += substring(length * groupeLength);
+      output += substring(length * groupLength);
     } else {
-      output = substring(0, remainder) + output;
+      if (remainder > 0) {
+        output = substring(0, remainder);
 
-      for (var i = 0; i < length; i++) {
-        output += splitter +
-            substring(i * groupeLength + remainder,
-                (i + 1) * groupeLength + remainder);
+        for (var i = 1; i <= length; i++) {
+          output += ',' +
+              substring(i * groupLength - (groupLength - remainder),
+                  (i + 1) * groupLength - (groupLength - remainder));
+        }
+      } else {
+        output = substring(0, groupLength);
+
+        for (var i = 1; i <= length; i++) {
+          output += ',' + substring(i * groupLength, (i + 1) * groupLength);
+        }
       }
     }
 
