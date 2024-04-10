@@ -27,10 +27,10 @@ class GeoLocation extends StatelessWidget {
                   ),
                 ),
                 children: [
-                  // TileLayer(
-                  //   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  //   userAgentPackageName: 'com.example.app',
-                  // ),
+                  TileLayer(
+                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'com.example.app',
+                  ),
                   Center(
                     child: SizedBox(
                       width: constraints.maxWidth *
