@@ -45,15 +45,15 @@ extension StringExtension on String {
         output = substring(0, remainder);
 
         for (var i = 1; i <= length; i++) {
-          output += ',' +
-              substring(i * groupLength - (groupLength - remainder),
-                  (i + 1) * groupLength - (groupLength - remainder));
+          final begin = i * groupLength - (groupLength - remainder);
+          final end = (i + 1) * groupLength - (groupLength - remainder);
+          output += ',${substring(begin, end)}';
         }
       } else {
         output = substring(0, groupLength);
 
         for (var i = 1; i <= length; i++) {
-          output += ',' + substring(i * groupLength, (i + 1) * groupLength);
+          output += ',${substring(i * groupLength, (i + 1) * groupLength)}';
         }
       }
     }
@@ -61,7 +61,6 @@ extension StringExtension on String {
     return output;
   }
 }
-
 
 extension ListExtension<T> on List<T> {
   List<T> joinAsList(List<T> seperator) {
